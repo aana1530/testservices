@@ -1,56 +1,129 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<hudson>
-  <disabledAdministrativeMonitors/>
-  <version>1.0</version>
-  <numExecutors>2</numExecutors>
-  <mode>NORMAL</mode>
-  <useSecurity>true</useSecurity>
-  <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
-    <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
-  </authorizationStrategy>
-  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
-    <disableSignup>true</disableSignup>
-    <enableCaptcha>false</enableCaptcha>
-  </securityRealm>
-  <disableRememberMe>false</disableRememberMe>
-  <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
-  <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
-  <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
-  <jdks>
-    <jdk>
-      <name>Java</name>
-      <home></home>
-      <properties>
-        <hudson.tools.InstallSourceProperty>
-          <installers>
-            <hudson.tools.JDKInstaller>
-              <id>jdk-8u131-oth-JPR</id>
-              <acceptLicense>true</acceptLicense>
-            </hudson.tools.JDKInstaller>
-          </installers>
-        </hudson.tools.InstallSourceProperty>
-      </properties>
-    </jdk>
-  </jdks>
-  <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
-  <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
-  <clouds/>
-  <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
-  <views>
-    <hudson.model.AllView>
-      <owner class="hudson" reference="../../.."/>
-      <name>all</name>
-      <filterExecutors>false</filterExecutors>
-      <filterQueue>false</filterQueue>
-      <properties class="hudson.model.View$PropertyList"/>
-    </hudson.model.AllView>
-  </views>
-  <primaryView>all</primaryView>
-  <slaveAgentPort>50000</slaveAgentPort>
-  <label></label>
-  <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
-    <excludeClientIPFromCrumb>false</excludeClientIPFromCrumb>
-  </crumbIssuer>
-  <nodeProperties/>
-  <globalNodeProperties/>
-</hudson>
+<flow-definition plugin="workflow-job@2.12">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <com.cwctravel.hudson.plugins.extended__choice__parameter.ExtendedChoiceParameterDefinition plugin="extended-choice-parameter@0.76">
+          <name>list</name>
+          <description></description>
+          <quoteValue>false</quoteValue>
+          <saveJSONParameterToFile>false</saveJSONParameterToFile>
+          <visibleItemCount>5</visibleItemCount>
+          <type>PT_SINGLE_SELECT</type>
+          <groovyScript>//git([url: &apos;https://github.com/aana1530/addressbook.git&apos;, branch: &apos;$result&apos;])
+String fileContents = new File(&apos;/root/.jenkins/workspace/A1/id.properties&apos;).text.readLines().get(1)
+proc1 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;/usr/bin/git ls-remote -h &apos;$fileContents&apos;&quot;].execute()
+proc2 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;awk &apos;{print \$2}&apos;&quot;].execute()
+//proc3 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;sed s%^refs/heads%origin%&quot;].execute()
+proc3 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;grep &apos;feature&apos;&quot;].execute()
+//proc4 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;awk -F &apos;/&apos; &apos;{print \$3 &apos;\\&apos; \$4}&apos;&quot;].execute()
+proc4 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;cut -d &apos;/&apos; -f3-&quot;].execute()
+
+all = proc1 | proc2 | proc3 | proc4 
+String result = all.text
+
+String filename = &quot;/tmp/branches.txt&quot;
+boolean success = new File(filename).write(result) 
+
+def multiline = &quot;cat /tmp/branches.txt&quot;.execute().text
+def list = multiline.readLines()
+return list</groovyScript>
+          <bindings></bindings>
+          <groovyClasspath></groovyClasspath>
+          <multiSelectDelimiter>,</multiSelectDelimiter>
+        </com.cwctravel.hudson.plugins.extended__choice__parameter.ExtendedChoiceParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers/>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.34">
+    <script>node {
+   def mvnHome
+   def version
+   stage(&apos;Preparation&apos;) { // for display purposes
+      // Get some code from a GitHub repository
+      //git &apos;https://github.com/aana1530/addressbook.git&apos;
+       //def text = new FileInputStream(&quot;/root/.jenkins/workspace/A1/ip.properties&quot;).getText().readLines().get(2)
+        String fileContents = new File(&apos;/root/.jenkins/workspace/A1/id.properties&apos;).text.readLines().get(1)
+      println fileContents  
+        //a = text.toString()
+    //    println a
+        //sh &apos;&quot;echo $a&quot; &gt; /tmp/file&apos;
+       // cr = readFile &apos;/tmp/file&apos;
+      //  def ret = sh(script: &quot;&apos;echo $a&apos;&quot;, returnStdout: true)
+//println ret
+        //sh var = $(&quot;echo $a&quot;)&apos;
+       // var = &apos;sh &quot;echo $a&quot;&apos;
+      //  println var
+        //println text
+       // git text
+    //   git &quot;$fileContents&quot;
+      git([url: &quot;${fileContents}&quot;, branch: &quot;$list&quot;])
+      // Get the Maven tool.
+      // ** NOTE: This &apos;M3&apos; Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool &apos;maven&apos;
+      version=&apos;3.3.9&apos;
+      //echo &quot;\u2600 BUILD_URL=${env.JENKINS_URL}&quot;
+   }
+   stage(&apos;Build&apos;) {
+      // Run the maven build
+      if (isUnix()) {
+         sh &quot;&apos;${mvnHome}/bin/mvn&apos; -Dmaven.test.failure.ignore clean package&quot;
+      } else {
+         bat(/&quot;${mvnHome}\bin\mvn&quot; -Dmaven.test.failure.ignore clean package/)
+      }
+   }
+  // stage(&apos;Results&apos;) {
+    //  junit &apos;**/target/surefire-reports/TEST-*.xml&apos;
+      //archive &apos;target/*.jar&apos;
+  // }
+  // stage(&apos;Sonar Analysis&apos;) {
+    //  build &apos;Sonar_Jenkins&apos;
+  // }
+  
+//  stage(&apos;SonarQube analysis&apos;) {
+  //  withSonarQubeEnv(&apos;SONAR&apos;) {
+      // requires SonarQube Scanner for Maven 3.2+
+    //  sh &apos;mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar&apos;
+//    }
+ // }
+  // stage(&apos;Publish&apos;) {
+    // nexusPublisher nexusInstanceId: &apos;NEXUS&apos;, nexusRepositoryId: &apos;Release&apos;, packages: [[$class: &apos;MavenPackage&apos;, mavenAssetList: [[classifier: &apos;&apos;, extension: &apos;&apos;, filePath: &apos;addressbook_main/target/addressbook.war&apos;]], mavenCoordinate: [artifactId: &apos;addressbook_main&apos;, groupId: &apos;com.edurekademo.tutorial&apos;, packaging: &apos;war&apos;, version: &apos;2.3.0&apos;]]]
+   //}
+   //stage(&apos;Deploy approval&apos;){
+    //input &quot;Deploy to prod?&quot;
+//}
+
+  //  stage(&apos;Send E-mail&apos;){
+    //    emailext body: &apos;Deployment Approved by MANAGER&apos;, subject: &apos;Deployment Approved&apos;, to: &apos;aashna1516@yahoo.com&apos;
+    //}
+   
+   stage(&apos;Deploy To AEM&apos;){
+       String fileip = new File(&apos;/root/.jenkins/workspace/A1/id.properties&apos;).text.readLines().get(0)
+      println fileip
+      env.b = fileip
+      println env.b
+      //a = fileip.toSring
+     // println a
+//     def command = sh &quot;echo ${fileip}&quot;
+  //   println command
+   //  fileip1 = sh(returnStdout: true, script: command).trim()
+//    sh(&quot;echo ${fileip1}&quot;)
+    sh &quot;&quot;&quot;curl -u admin:admin -F file=@&quot;$WORKSPACE/package/target/aem-sample-project-package-1.0.0-SNAPSHOT.zip&quot; -F name=&quot;aem-sample-project-package-1.0.0-SNAPSHOT.zip&quot; -F force=true -F install=true http://&apos;&apos;&apos;${env.b}&apos;&apos;&apos;:4502/crx/packmgr/service.jsp
+&quot;&quot;&quot;
+
+    }
+}
+
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
