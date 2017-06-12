@@ -14,7 +14,7 @@
           <visibleItemCount>5</visibleItemCount>
           <type>PT_SINGLE_SELECT</type>
           <groovyScript>//git([url: &apos;https://github.com/aana1530/addressbook.git&apos;, branch: &apos;$result&apos;])
-String fileContents = new File(&apos;/root/.jenkins/workspace/A1/id.properties&apos;).text.readLines().get(1)
+String fileContents = new File(&apos;/root/.jenkins/id.properties&apos;).text.readLines().get(1)
 proc1 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;/usr/bin/git ls-remote -h &apos;$fileContents&apos;&quot;].execute()
 proc2 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;awk &apos;{print \$2}&apos;&quot;].execute()
 //proc3 = [&apos;/bin/bash&apos;, &apos;-c&apos;, &quot;sed s%^refs/heads%origin%&quot;].execute()
@@ -49,7 +49,7 @@ return list</groovyScript>
       // Get some code from a GitHub repository
       //git &apos;https://github.com/aana1530/addressbook.git&apos;
        //def text = new FileInputStream(&quot;/root/.jenkins/workspace/A1/ip.properties&quot;).getText().readLines().get(2)
-        String fileContents = new File(&apos;/root/.jenkins/workspace/A1/id.properties&apos;).text.readLines().get(1)
+        String fileContents = new File(&apos;/root/.jenkins/id.properties&apos;).text.readLines().get(1)
       println fileContents  
         //a = text.toString()
     //    println a
@@ -105,7 +105,7 @@ return list</groovyScript>
     //}
    
    stage(&apos;Deploy To AEM&apos;){
-       String fileip = new File(&apos;/root/.jenkins/workspace/A1/id.properties&apos;).text.readLines().get(0)
+       String fileip = new File(&apos;/root/.jenkins/id.properties&apos;).text.readLines().get(0)
       println fileip
       env.b = fileip
       println env.b
