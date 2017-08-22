@@ -8,7 +8,7 @@ node {
        //def text = new FileInputStream("/root/.jenkins/workspace/A1/ip.properties").getText().readLines().get(2)
         String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(1)
       println fileContents
-      println $list
+	   println ${list}
         //a = text.toString()
     //    println a
         //sh '"echo $a" > /tmp/file'
