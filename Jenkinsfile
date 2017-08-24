@@ -59,7 +59,7 @@ node {
       sh 'mvn clean install sonar:sonar'
       }
    }
-  
+ 
 //  stage('SonarQube analysis') {
   //  withSonarQubeEnv('SONAR') {
       // requires SonarQube Scanner for Maven 3.2+
