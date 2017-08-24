@@ -54,7 +54,7 @@ node {
       //archive 'target/*.jar'
   // }
    stage('Sonar Analysis') {
-      build 'sonar'
+     // build 'sonar'
       withSonarQubeEnv('sonar') {
       sh "/root/.jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven/bin/mvn clean install sonar:sonar"
       }
