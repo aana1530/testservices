@@ -25,7 +25,7 @@ node {
     //   git "$fileContents"
    //  git([url: "${fileContents}", branch: "$list"])
  //  git([url: "git@gitlab.dxide.com:sapient/alcs-devops-cm.git", branch: "$list"])
-	   git([url: "https://"sapient-builder":\"'YXP2@Fg&n3WpDS+7'\"@gitlab.dxide.com/sapient/alcs-aem-backend.git", branch: "$list"])
+	   git([url: "https://"sapient-builder":"YXP2\@Fg\&n3WpDS+7"@gitlab.dxide.com/sapient/alcs-aem-backend.git", branch: "$list"])
 //	 sh "git clone '${fileContents}'"
 // sh " cd alcs-aem-backend ;git checkout '$list'"
       
