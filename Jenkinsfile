@@ -54,8 +54,8 @@ node {
       //archive 'target/*.jar'
   // }
    stage('Sonar Analysis') {
-      build 'Sonar'
-      withSonarQubeEnv('Sonar') {
+      build 'sonar'
+      withSonarQubeEnv('sonar') {
       sh 'mvn clean install sonar:sonar'
       }
    }
