@@ -8,7 +8,7 @@ node {
        //def text = new FileInputStream("/root/.jenkins/workspace/A1/ip.properties").getText().readLines().get(2)
         String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(1)
       println fileContents
-	   def libName = params.list
+	//   def libName = params.list
 	   println list
 	 //  println ${list}
         //a = text.toString()
@@ -27,7 +27,7 @@ node {
  //  git([url: "git@gitlab.dxide.com:sapient/alcs-devops-cm.git", branch: "$list"])
 	  // git([url: "https://sapient-builder:YXP2%40Fg%26n3WpDS%27@gitlab.dxide.com/sapient/alcs-aem-backend.git", branch: "$list"])
 //git credentialsId: 'sapient', url: 'https://gitlab.dxide.com/sapient/alcs-aem-backend.git'
-	   git branch: '$list', credentialsId: 'sapient', url: 'https://gitlab.dxide.com/sapient/alcs-aem-backend.git'
+	   git branch: '$list', credentialsId: 'sapient', url: '${fileContents}'
 	   
 	   //	 sh "git clone '${fileContents}'"
 // sh " cd alcs-aem-backend ;git checkout '$list'"
