@@ -6,8 +6,8 @@ node {
       // Get some code from a GitHub repository
       //git 'https://github.com/aana1530/addressbook.git'
        //def text = new FileInputStream("/root/.jenkins/workspace/A1/ip.properties").getText().readLines().get(2)
-        String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(1)
-      println fileContents
+        String fileContents1 = new File('/root/.jenkins/id.properties').text.readLines().get(2)
+      println fileContents1
 	//   def libName = params.list
 	   println list
 	 //  println ${list}
@@ -27,7 +27,7 @@ node {
  //  git([url: "git@gitlab.dxide.com:sapient/alcs-devops-cm.git", branch: "$list"])
 	  // git([url: "https://sapient-builder:YXP2%40Fg%26n3WpDS%27@gitlab.dxide.com/sapient/alcs-aem-backend.git", branch: "$list"])
 //git credentialsId: 'sapient', url: 'https://gitlab.dxide.com/sapient/alcs-aem-backend.git'
-	   git branch: list, credentialsId: 'sapient', url: fileContents
+	   git branch: list, credentialsId: 'sapient', url: fileContents1
 	   
 	   //	 sh "git clone '${fileContents}'"
 // sh " cd alcs-aem-backend ;git checkout '$list'"
@@ -53,12 +53,12 @@ node {
     //  junit '**/target/surefire-reports/TEST-*.xml'
       //archive 'target/*.jar'
   // }
-   stage('Sonar Analysis') {
+  // stage('Sonar Analysis') {
      // build 'sonar'
-      withSonarQubeEnv('sonar') {
-      sh "${mvnHome}/bin/mvn clean install sonar:sonar -Dsonar.username='admin' -Dsonar.password='admin'"
-      }
-   }
+     // withSonarQubeEnv('sonar') {
+     // sh "${mvnHome}/bin/mvn clean install sonar:sonar -Dsonar.username='admin' -Dsonar.password='admin'"
+     // }
+  // }
  
 //  stage('SonarQube analysis') {
   //  withSonarQubeEnv('SONAR') {
@@ -88,7 +88,7 @@ node {
   //   println command
    //  fileip1 = sh(returnStdout: true, script: command).trim()
 //    sh("echo ${fileip1}")
-    sh """curl -u admin:admin -F file=@"$WORKSPACE/ui/target/alcs-backend-1.0-SNAPSHOT.zip" -F name="alcs-backend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
+    sh """curl -u admin:admin -F file=@"$WORKSPACE/ui/target/alcs-frontend-1.0-SNAPSHOT.zip" -F name="alcs-frontend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
 """
 
     }
