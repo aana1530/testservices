@@ -88,7 +88,7 @@ node {
   //   println command
    //  fileip1 = sh(returnStdout: true, script: command).trim()
 //    sh("echo ${fileip1}")
-    sh """curl -u admin:admin -F file=@"$WORKSPACE/target/alcs-frontend-1.0-SNAPSHOT.zip" -F name="alcs-frontend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
+    sh """curl -u admin:admin -F file=@"$WORKSPACE/frontend/target/alcs-frontend-1.0-SNAPSHOT.zip" -F name="alcs-frontend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
 """
 
     }
