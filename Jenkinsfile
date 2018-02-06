@@ -44,7 +44,7 @@ node {
    stage('Build') {
       // Run the maven build
       if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -DsharedLocation=${WORKSPACE}/AlcsServices/src/main/resources/app-config/dev/ -Dmaven.test.failure.ignore clean install "
+         sh "'${mvnHome}/bin/mvn' -f AlcsServices/pom.xml -DsharedLocation=${WORKSPACE}/AlcsServices/src/main/resources/app-config/dev/ -Dmaven.test.failure.ignore clean install "
       } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean install/)
       }
