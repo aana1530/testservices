@@ -6,7 +6,7 @@ node {
       // Get some code from a GitHub repository
       //git 'https://github.com/aana1530/addressbook.git'
        //def text = new FileInputStream("/root/.jenkins/workspace/A1/ip.properties").getText().readLines().get(2)
-        String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(2)
+        String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(5)
       println fileContents
 	//   def libName = params.list
 	   println list
@@ -77,18 +77,18 @@ node {
     //    emailext body: 'Deployment Approved by MANAGER', subject: 'Deployment Approved', to: 'aashna1516@yahoo.com'
     //}
    
-   stage('Deploy To AEM'){
-       String fileip = new File('/root/.jenkins/id.properties').text.readLines().get(0)
-      println fileip
-      env.b = fileip
-      println env.b
+   //stage('Deploy To AEM'){
+     //  String fileip = new File('/root/.jenkins/id.properties').text.readLines().get(0)
+     // println fileip
+     // env.b = fileip
+     // println env.b
       //a = fileip.toSring
      // println a
 //     def command = sh "echo ${fileip}"
   //   println command
    //  fileip1 = sh(returnStdout: true, script: command).trim()
 //    sh("echo ${fileip1}")
-    sh """curl -u admin:admin -F file=@"$WORKSPACE/frontend/target/alcs-frontend-1.0-SNAPSHOT.zip" -F name="alcs-frontend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
+   // sh """curl -u admin:admin -F file=@"$WORKSPACE/frontend/target/alcs-frontend-1.0-SNAPSHOT.zip" -F name="alcs-frontend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
 """
 
     }
