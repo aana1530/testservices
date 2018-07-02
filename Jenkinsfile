@@ -6,7 +6,7 @@ node {
       // Get some code from a GitHub repository
       //git 'https://github.com/aana1530/addressbook.git'
        //def text = new FileInputStream("/root/.jenkins/workspace/A1/ip.properties").getText().readLines().get(2)
-        String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(5)
+        String fileContents = new File('/root/.jenkins/id.properties').text.readLines().get(3)
       println fileContents
 	//   def libName = params.list
 	   println list
