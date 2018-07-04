@@ -90,9 +90,9 @@ node {
 //    sh("echo ${fileip1}")
    // sh """curl -u admin:admin -F file=@"$WORKSPACE/frontend/target/alcs-frontend-1.0-SNAPSHOT.zip" -F name="alcs-frontend-1.0-SNAPSHOT.zip" -F force=true -F install=true http://'''${env.b}''':4502/crx/packmgr/service.jsp
 //"""
-	   cp ${WORKSPACE}/AlcsServices/target/AlcsServices.war /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/webapps/
-	 cp ${WORKSPACE}/AlcsServices/src/main/resources/app-config/dev/* /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/
-	 cp ${WORKSPACE}/AlcsServices/src/main/resources/log4j2.xml /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/
+	 sh  "cp ${WORKSPACE}/AlcsServices/target/AlcsServices.war /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/webapps/"
+	sh "cp ${WORKSPACE}/AlcsServices/src/main/resources/app-config/dev/* /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/"
+	 sh "cp ${WORKSPACE}/AlcsServices/src/main/resources/log4j2.xml /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/"
 	 
 
    }
