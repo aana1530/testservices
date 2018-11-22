@@ -93,6 +93,7 @@ node {
 	 sh  "cp ${WORKSPACE}/AlcsServices/target/AlcsServices.war /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/webapps/"
 	sh "cp ${WORKSPACE}/AlcsServices/src/main/resources/app-config/dev/* /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/"
 	 sh "cp ${WORKSPACE}/AlcsServices/src/main/resources/log4j2.xml /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/"
+	  sh "cp ${WORKSPACE}/AlcsServices/src/main/resources/alcs_controls.xml /opt/apache-tomcat-8.5.20.tar.gz/apache-tomcat-8.5.20/config/"
 	 
 
    }
